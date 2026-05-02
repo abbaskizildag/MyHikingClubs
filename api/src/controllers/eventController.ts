@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { EventService } from '../services/eventService';
 import { ClubService } from '../services/clubService';
 import { AuthRequest } from '../middleware/authMiddleware';
+import { AttendeeStatus } from '@prisma/client';
 
 const eventService = new EventService();
 const clubService = new ClubService();
