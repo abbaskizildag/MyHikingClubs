@@ -22,6 +22,8 @@ export const tr = {
       leader: "LİDER",
       admin: "ADMİN",
     },
+    loadingError: "Veriler yüklenemedi",
+    description: "Açıklama",
   },
   navbar: {
     title: "My Hiking Clubs"
@@ -114,6 +116,8 @@ export const tr = {
     editExpeditionSubtitle: "Etkinlik detaylarını güncelle.",
     updateEvent: "Etkinliği Güncelle",
     updating: "Etkinlik Güncelleniyor...",
+    country: "Ülke",
+    city: "Şehir",
   },
   auth: {
     loginTitle: "Giriş Yap",

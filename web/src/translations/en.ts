@@ -22,15 +22,11 @@ export const en = {
       leader: "LEADER",
       admin: "ADMIN",
     },
+    loadingError: "Failed to load data",
+    description: "Description",
   },
   navbar: {
     title: "My Hiking Clubs"
-  },
-  home: {
-    spotsFull: "Spots Full",
-    confirmed: "Confirmed",
-    waitlisted: "Waitlisted",
-    backToClubs: "Back to Clubs",
   },
   home: {
     title: "Upcoming Expeditions",
@@ -39,11 +35,14 @@ export const en = {
     easy: "Easy",
     moderate: "Moderate",
     hard: "Hard",
+    spotsFull: "Spots Full",
+    confirmed: "Confirmed",
+    waitlisted: "Waitlisted",
+    backToClubs: "Back to Clubs",
   },
   clubs: {
     title: "Hiking Clubs",
     subtitle: "Join a community or start your own expedition group.",
-    createClub: "Create Club",
     createButton: "Create Club",
     creating: "Creating Group...",
     createTitle: "Start a Hiking Club",
@@ -113,7 +112,6 @@ export const en = {
     selectMemberOptional: "Select a member (optional)...",
     selectCountry: "Select Country",
     selectCity: "Select City",
-    dateTime: "Date and Time",
     maxCapacity: "Max Capacity",
     easyDesc: "Easy - Beginner Friendly",
     moderateDesc: "Moderate - Regular Hikers",
@@ -123,6 +121,8 @@ export const en = {
     editExpeditionSubtitle: "Update your adventure details.",
     updateEvent: "Update Event",
     updating: "Updating Expedition...",
+    country: "Country",
+    city: "City",
   },
   auth: {
     loginTitle: "Login",
