@@ -38,7 +38,7 @@ export class ClubService {
   }
 
   async createClub(data: { name: string; description: string; cityId?: string }, creatorId: string) {
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: any) => {
       const club = await tx.club.create({ 
         data: {
           ...data,

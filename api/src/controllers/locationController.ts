@@ -9,6 +9,11 @@ export class LocationController {
       });
       
       // Move Turkey to the top
+      const enriched = countries.map((c: any) => ({
+        id: c.id,
+        name: c.name,
+        code: c.code
+      }));
       const trIndex = countries.findIndex(c => c.code === 'TR');
       if (trIndex > -1) {
         const tr = countries.splice(trIndex, 1)[0];

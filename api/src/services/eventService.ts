@@ -58,7 +58,7 @@ export class EventService {
   }
 
   async joinEvent(eventId: string, userId: string) {
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: any) => {
       const event = await tx.event.findUnique({
         where: { id: eventId },
         include: { attendees: true }
@@ -68,12 +68,12 @@ export class EventService {
         throw new Error('Event not found');
       }
 
-      const existingAttendee = event.attendees.find(a => a.userId === userId);
+      const existingAttendee = event.attendees.find((a: any) => a.userId === userId);
       if (existingAttendee) {
         throw new Error('User is already registered for this event');
       }
 
-      const confirmedCount = event.attendees.filter(a => a.status === AttendeeStatus.CONFIRMED).length;
+      const confirmedCount = event.attendees.filter((a: any) => a.status === AttendeeStatus.CONFIRMED).length;
       const status = confirmedCount < event.capacity ? AttendeeStatus.CONFIRMED : AttendeeStatus.WAITLISTED;
 
       const newAttendee = await tx.eventAttendee.create({
@@ -89,7 +89,7 @@ export class EventService {
   }
 
   async leaveEvent(eventId: string, userId: string) {
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: any) => {
       const attendee = await tx.eventAttendee.findUnique({
         where: {
           eventId_userId: { eventId, userId }
@@ -134,7 +134,7 @@ export class EventService {
     const { leaderIds, ...eventData } = data;
     const uniqueLeaderIds = Array.from(new Set(leaderIds)) as string[];
     
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: any) => {
       const event = await tx.event.create({
         data: {
           title: eventData.title,
@@ -174,7 +174,7 @@ export class EventService {
     const { leaderIds, ...eventData } = data;
     const uniqueLeaderIds = leaderIds ? Array.from(new Set(leaderIds)) as string[] : null;
 
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: any) => {
       const updated = await tx.event.update({
         where: { id: eventId },
         data: {

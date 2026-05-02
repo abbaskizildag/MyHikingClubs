@@ -11,9 +11,9 @@ export class EventController {
     try {
       const events = await eventService.getAllEvents();
       
-      const enrichedEvents = events.map(event => {
-        const confirmedCount = event.attendees.filter(a => a.status === 'CONFIRMED').length;
-        const waitlistCount = event.attendees.filter(a => a.status === 'WAITLISTED').length;
+      const enrichedEvents = events.map((event: any) => {
+        const confirmedCount = event.attendees.filter((a: any) => a.status === 'CONFIRMED').length;
+        const waitlistCount = event.attendees.filter((a: any) => a.status === 'WAITLISTED').length;
         
         return {
           ...event,
@@ -39,8 +39,8 @@ export class EventController {
         return res.status(404).json({ error: 'Event not found' });
       }
 
-      const confirmedCount = event.attendees.filter(a => a.status === 'CONFIRMED').length;
-      const waitlistCount = event.attendees.filter(a => a.status === 'WAITLISTED').length;
+      const confirmedCount = event.attendees.filter((a: any) => a.status === AttendeeStatus.CONFIRMED).length;
+      const waitlistCount = event.attendees.filter((a: any) => a.status === AttendeeStatus.WAITLISTED).length;
 
       res.json({
         ...event,
