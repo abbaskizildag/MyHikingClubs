@@ -3,7 +3,10 @@ import { getEvents } from '../services/api';
 import { EventCard } from '../components/EventCard';
 import clsx from 'clsx';
 
+import { useTranslation } from 'react-i18next';
+
 export function Home() {
+  const { t } = useTranslation();
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('ALL');
@@ -30,10 +33,10 @@ export function Home() {
     <div>
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-          Upcoming Expeditions
+          {t('home.title')}
         </h2>
         <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
-          Discover and join our upcoming hiking events. From easy walks to challenging peaks.
+          {t('home.subtitle')}
         </p>
       </div>
 
@@ -49,7 +52,7 @@ export function Home() {
                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
             )}
           >
-            {f === 'ALL' ? 'All Levels' : f}
+            {f === 'ALL' ? t('home.allLevels') : t(`home.${f.toLowerCase()}`)}
           </button>
         ))}
       </div>

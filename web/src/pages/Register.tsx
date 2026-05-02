@@ -3,8 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import { UserPlus, Mail, Lock, User as UserIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function Register() {
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,7 +25,7 @@ export function Register() {
       login(response.data.user, response.data.token);
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to register');
+      setError(err.response?.data?.error || t('auth.registerFailed'));
     } finally {
       setLoading(false);
     }
@@ -36,8 +38,8 @@ export function Register() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-green bg-opacity-10 rounded-full mb-4">
             <UserPlus className="w-8 h-8 text-forest-green" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900">Create Account</h2>
-          <p className="text-gray-500 mt-2">Join the community and start hiking</p>
+          <h2 className="text-2xl font-bold text-gray-900">{t('auth.registerTitle')}</h2>
+          <p className="text-gray-500 mt-2">{t('auth.registerSubtitle')}</p>
         </div>
 
         {error && (
@@ -48,7 +50,7 @@ export function Register() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('auth.name')}</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <UserIcon className="h-5 w-5 text-gray-400" />
@@ -65,7 +67,7 @@ export function Register() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('auth.email')}</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Mail className="h-5 w-5 text-gray-400" />
@@ -82,7 +84,7 @@ export function Register() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('auth.password')}</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Lock className="h-5 w-5 text-gray-400" />
@@ -104,17 +106,19 @@ export function Register() {
             disabled={loading}
             className="w-full bg-forest-green text-white font-bold py-3 px-4 rounded-xl hover:bg-opacity-90 transition disabled:opacity-50"
           >
-            {loading ? 'Creating account...' : 'Register'}
+            {loading ? t('common.loading') : t('common.register')}
           </button>
         </form>
 
         <p className="mt-8 text-center text-sm text-gray-600">
-          Already have an account?{' '}
+          {t('auth.haveAccount')}{' '}
           <Link to="/login" className="font-bold text-forest-green hover:underline">
-            Sign in
+            {t('auth.loginTitle')}
           </Link>
         </p>
       </div>
     </div>
+  );
+}
   );
 }

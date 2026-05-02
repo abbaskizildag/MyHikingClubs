@@ -3,8 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import { LogIn, Mail, Lock } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function Login() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,7 +24,7 @@ export function Login() {
       login(response.data.user, response.data.token);
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to login');
+      setError(err.response?.data?.error || t('auth.loginFailed'));
     } finally {
       setLoading(false);
     }
@@ -35,8 +37,8 @@ export function Login() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-green bg-opacity-10 rounded-full mb-4">
             <LogIn className="w-8 h-8 text-forest-green" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900">Welcome Back</h2>
-          <p className="text-gray-500 mt-2">Sign in to join upcoming hikes</p>
+          <h2 className="text-2xl font-bold text-gray-900">{t('auth.welcomeBack')}</h2>
+          <p className="text-gray-500 mt-2">{t('auth.loginSubtitle')}</p>
         </div>
 
         {error && (
@@ -47,7 +49,7 @@ export function Login() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('auth.email')}</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Mail className="h-5 w-5 text-gray-400" />
@@ -64,7 +66,7 @@ export function Login() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('auth.password')}</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Lock className="h-5 w-5 text-gray-400" />
@@ -85,17 +87,19 @@ export function Login() {
             disabled={loading}
             className="w-full bg-forest-green text-white font-bold py-3 px-4 rounded-xl hover:bg-opacity-90 transition disabled:opacity-50"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? t('common.loading') : t('common.login')}
           </button>
         </form>
 
         <p className="mt-8 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
+          {t('auth.noAccount')}{' '}
           <Link to="/register" className="font-bold text-forest-green hover:underline">
-            Register now
+            {t('auth.registerNow')}
           </Link>
         </p>
       </div>
     </div>
+  );
+}
   );
 }

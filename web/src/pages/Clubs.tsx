@@ -4,7 +4,10 @@ import { getClubs } from '../services/api';
 import { Users, Plus, ChevronRight, MapPin } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+import { useTranslation } from 'react-i18next';
+
 export function Clubs() {
+  const { t } = useTranslation();
   const [clubs, setClubs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
@@ -26,10 +29,10 @@ export function Clubs() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            Hiking Clubs
+            {t('clubs.title')}
           </h2>
           <p className="mt-2 text-lg text-gray-600">
-            Join a community or start your own expedition group.
+            {t('clubs.subtitle')}
           </p>
         </div>
         {user && (
@@ -38,7 +41,7 @@ export function Clubs() {
             className="flex items-center bg-forest-green text-white px-4 py-2 rounded-xl font-bold hover:bg-opacity-90 transition shadow-lg"
           >
             <Plus className="w-5 h-5 mr-2" />
-            Create Club
+            {t('clubs.createClub')}
           </Link>
         )}
       </div>
@@ -62,7 +65,7 @@ export function Clubs() {
                 <div className="flex flex-col gap-2 mb-6">
                   <div className="flex items-center text-sm text-gray-500">
                     <span className="font-semibold text-forest-green">{club._count?.events || 0}</span>
-                    <span className="ml-1">Upcoming Events</span>
+                    <span className="ml-1">{t('clubs.upcomingEvents')}</span>
                   </div>
                   {club.city && (
                     <div className="flex items-center text-xs text-gray-400">
@@ -75,7 +78,7 @@ export function Clubs() {
                   to={`/clubs/${club.id}`}
                   className="flex items-center justify-center w-full bg-gray-50 text-gray-900 font-bold py-3 rounded-xl hover:bg-forest-green hover:text-white transition"
                 >
-                  View Group <ChevronRight className="w-4 h-4 ml-2" />
+                  {t('common.viewGroup')} <ChevronRight className="w-4 h-4 ml-2" />
                 </Link>
               </div>
             </div>
@@ -84,7 +87,7 @@ export function Clubs() {
           {clubs.length === 0 && (
             <div className="col-span-full text-center py-20 bg-white rounded-2xl border-2 border-dashed border-gray-200">
               <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500 text-lg">No clubs found yet. Be the first to start one!</p>
+              <p className="text-gray-500 text-lg">{t('clubs.noClubsYet')}</p>
             </div>
           )}
         </div>

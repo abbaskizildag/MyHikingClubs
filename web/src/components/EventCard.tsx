@@ -7,7 +7,10 @@ interface EventCardProps {
   event: any;
 }
 
+import { useTranslation } from 'react-i18next';
+
 export function EventCard({ event }: EventCardProps) {
+  const { t } = useTranslation();
   const isFull = event.isFull;
   
   const difficultyColors: Record<string, string> = {
@@ -21,10 +24,10 @@ export function EventCard({ event }: EventCardProps) {
       <div className="p-5 flex-grow flex flex-col">
         <div className="flex justify-between items-start mb-4">
           <span className={clsx('text-xs font-semibold px-2.5 py-0.5 rounded', difficultyColors[event.difficultyLevel] || 'bg-gray-100 text-gray-800')}>
-            {event.difficultyLevel}
+            {t(`home.${event.difficultyLevel.toLowerCase()}`)}
           </span>
           <span className={clsx('text-xs font-semibold px-2 py-0.5 rounded border', isFull ? 'border-red-200 text-red-600 bg-red-50' : 'border-green-200 text-green-600 bg-green-50')}>
-            {isFull ? 'Waitlist Open' : 'Spots Available'}
+            {isFull ? t('common.waitlisted') : t('common.spotsAvailable')}
           </span>
         </div>
         
@@ -47,12 +50,12 @@ export function EventCard({ event }: EventCardProps) {
           </div>
           <div className="flex items-center">
             <Users className="w-4 h-4 mr-2 text-forest-green" />
-            <span>{event.confirmedCount} / {event.capacity} Confirmed</span>
+            <span>{event.confirmedCount} / {event.capacity} {t('common.confirmed')}</span>
           </div>
           {event.waitlistCount > 0 && (
             <div className="flex items-center text-orange-500">
               <Users className="w-4 h-4 mr-2" />
-              <span>{event.waitlistCount} Waitlisted</span>
+              <span>{event.waitlistCount} {t('common.waitlisted')}</span>
             </div>
           )}
           {event.leaders && event.leaders.length > 0 && (
@@ -71,7 +74,7 @@ export function EventCard({ event }: EventCardProps) {
           to={`/event/${event.id}`}
           className="block w-full text-center bg-forest-green hover:bg-opacity-90 text-white font-medium py-2 px-4 rounded transition"
         >
-          View Details
+          {t('common.viewDetails')}
         </Link>
       </div>
     </div>

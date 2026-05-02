@@ -3,22 +3,40 @@ import { Home, EventDetails, Login, Register, Clubs, CreateClub, ClubDetails, Cr
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { LogOut, Map as MapIcon } from 'lucide-react';
 
+import { useTranslation } from 'react-i18next';
+
 function Navbar() {
   const { user, logout } = useAuth();
+  const { t, i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'tr' ? 'en' : 'tr';
+    i18n.changeLanguage(newLang);
+  };
 
   return (
     <header className="bg-forest-green text-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold tracking-tight hover:text-sand transition flex items-center">
           <MapIcon className="w-6 h-6 mr-2" />
-          My Hiking Clubs
+          {t('navbar.title')}
         </Link>
         <nav>
           <ul className="flex items-center space-x-6">
-            <li><Link to="/" className="hover:text-sand transition">Home</Link></li>
-            <li><Link to="/clubs" className="hover:text-sand transition">Clubs</Link></li>
+            <li><Link to="/" className="hover:text-sand transition">{t('common.home')}</Link></li>
+            <li><Link to="/clubs" className="hover:text-sand transition">{t('common.clubs')}</Link></li>
+            
+            <li className="flex items-center">
+              <button 
+                onClick={toggleLanguage}
+                className="bg-white bg-opacity-10 hover:bg-opacity-20 px-3 py-1 rounded-lg text-xs font-bold transition flex items-center border border-white border-opacity-20"
+              >
+                {i18n.language.toUpperCase()}
+              </button>
+            </li>
+
             {user ? (
-              <li className="flex items-center space-x-4 border-l pl-6 border-forest-green border-opacity-30">
+              <li className="flex items-center space-x-4 border-l pl-6 border-white border-opacity-10">
                 <div className="flex items-center space-x-2">
                   <div className="w-8 h-8 rounded-full bg-sand text-forest-green flex items-center justify-center font-bold text-xs">
                     {user.name?.charAt(0) || 'U'}
@@ -28,16 +46,16 @@ function Navbar() {
                 <button 
                   onClick={logout}
                   className="bg-sand hover:bg-opacity-90 p-2.5 rounded-xl transition text-forest-green shadow-lg flex items-center group"
-                  title="Logout"
+                  title={t('common.logout')}
                 >
                   <LogOut className="w-4 h-4 group-hover:scale-110 transition" />
                 </button>
               </li>
             ) : (
               <li className="space-x-4">
-                <Link to="/login" className="hover:text-sand transition">Login</Link>
+                <Link to="/login" className="hover:text-sand transition">{t('common.login')}</Link>
                 <Link to="/register" className="bg-sand text-forest-green px-4 py-2 rounded-lg font-bold hover:bg-opacity-90 transition">
-                  Register
+                  {t('common.register')}
                 </Link>
               </li>
             )}
@@ -72,13 +90,13 @@ function App() {
 
           <footer className="bg-gray-900 text-gray-400 py-10 text-center border-t border-gray-800">
             <div className="container mx-auto px-4">
-              <p className="text-white font-bold mb-2">My Hiking Clubs</p>
-              <p className="text-sm mb-4">Discover the best hiking trails and join our passionate community.</p>
+              <p className="text-white font-bold mb-2">{t('navbar.title')}</p>
+              <p className="text-sm mb-4">{t('home.subtitle')}</p>
               <div className="flex justify-center space-x-6 mb-6">
-                <Link to="/clubs" className="hover:text-white transition">Explore Clubs</Link>
-                <Link to="/" className="hover:text-white transition">Upcoming Events</Link>
+                <Link to="/clubs" className="hover:text-white transition">{t('common.clubs')}</Link>
+                <Link to="/" className="hover:text-white transition">{t('common.home')}</Link>
               </div>
-              <p className="text-xs">&copy; {new Date().getFullYear()} My Hiking Clubs. All rights reserved.</p>
+              <p className="text-xs">&copy; {new Date().getFullYear()} {t('navbar.title')}. All rights reserved.</p>
             </div>
           </footer>
         </div>
