@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Home, EventDetails, Login, Register, Clubs, CreateClub, ClubDetails, CreateEvent, EditEvent, EditClub } from './pages';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { LogOut, User as UserIcon, Map as MapIcon, Users } from 'lucide-react';
+import { LogOut, Map as MapIcon } from 'lucide-react';
 
 function Navbar() {
   const { user, logout } = useAuth();
