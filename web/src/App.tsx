@@ -29,9 +29,9 @@ function Navbar() {
             <li className="flex items-center">
               <button 
                 onClick={toggleLanguage}
-                className="bg-white bg-opacity-10 hover:bg-opacity-20 px-3 py-1 rounded-lg text-xs font-bold transition flex items-center border border-white border-opacity-20"
+                className="bg-transparent hover:bg-white hover:bg-opacity-10 text-white px-3 py-1.5 rounded-lg text-xs font-black transition-all flex items-center border-2 border-white border-opacity-30 hover:border-opacity-50 shadow-sm"
               >
-                {i18n.language.toUpperCase()}
+                {i18n.language.substring(0, 2).toUpperCase()}
               </button>
             </li>
 
