@@ -24,6 +24,8 @@ export const tr = {
     },
     loadingError: "Veriler yüklenemedi",
     description: "Açıklama",
+    confirmed: "Onaylandı",
+    waitlisted: "Yedek Liste",
   },
   navbar: {
     title: "My Hiking Clubs"

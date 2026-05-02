@@ -24,6 +24,8 @@ export const en = {
     },
     loadingError: "Failed to load data",
     description: "Description",
+    confirmed: "Confirmed",
+    waitlisted: "Waitlisted",
   },
   navbar: {
     title: "My Hiking Clubs"
@@ -36,8 +38,6 @@ export const en = {
     moderate: "Moderate",
     hard: "Hard",
     spotsFull: "Spots Full",
-    confirmed: "Confirmed",
-    waitlisted: "Waitlisted",
     backToClubs: "Back to Clubs",
   },
   clubs: {
