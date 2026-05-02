@@ -101,5 +101,3 @@ export function Login() {
     </div>
   );
 }
-  );
-}

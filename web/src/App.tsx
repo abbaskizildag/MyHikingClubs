@@ -67,6 +67,7 @@ function Navbar() {
 }
 
 function App() {
+  const { t } = useTranslation();
   return (
     <AuthProvider>
       <Router>
