@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createClub, getCountries, getCities } from '../services/api';
 import { Users, Info, ArrowLeft, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function CreateClub() {
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [countries, setCountries] = useState<any[]>([]);
@@ -35,7 +37,7 @@ export function CreateClub() {
       const club = await createClub({ name, description, cityId });
       navigate(`/clubs/${club.id}`);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to create club');
+      setError(err.response?.data?.error || t('common.loadingError'));
     } finally {
       setLoading(false);
     }
@@ -44,7 +46,7 @@ export function CreateClub() {
   return (
     <div className="max-w-2xl mx-auto">
       <button onClick={() => navigate('/clubs')} className="flex items-center text-forest-green hover:underline mb-6">
-        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Clubs
+        <ArrowLeft className="w-4 h-4 mr-2" /> {t('common.back')}
       </button>
 
       <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
@@ -53,8 +55,8 @@ export function CreateClub() {
             <Users className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Start a Hiking Club</h2>
-            <p className="text-gray-500">Bring people together for new adventures.</p>
+            <h2 className="text-2xl font-bold text-gray-900">{t('clubs.createTitle')}</h2>
+            <p className="text-gray-500">{t('clubs.createSubtitle')}</p>
           </div>
         </div>
 
@@ -66,33 +68,33 @@ export function CreateClub() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Club Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('forms.clubName')}</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-forest-green focus:border-forest-green transition"
-              placeholder="e.g. Peak Seekers Istanbul"
+              placeholder={t('clubs.clubNamePlaceholder')}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('common.description')}</label>
             <textarea
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={4}
               className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-forest-green focus:border-forest-green transition"
-              placeholder="What is your club about? What kind of hikes do you organize?"
+              placeholder={t('clubs.descriptionPlaceholder')}
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <MapPin className="w-4 h-4 mr-2 text-forest-green" /> Country
+                <MapPin className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.country')}
               </label>
               <select
                 required
@@ -100,7 +102,7 @@ export function CreateClub() {
                 onChange={(e) => setCountryId(e.target.value)}
                 className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-forest-green focus:border-forest-green transition bg-white"
               >
-                <option value="">Select Country</option>
+                <option value="">{t('eventDetails.selectCountry')}</option>
                 {countries.map(c => (
                   <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
@@ -109,7 +111,7 @@ export function CreateClub() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <MapPin className="w-4 h-4 mr-2 text-forest-green" /> City
+                <MapPin className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.city')}
               </label>
               <select
                 required
@@ -118,7 +120,7 @@ export function CreateClub() {
                 onChange={(e) => setCityId(e.target.value)}
                 className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-forest-green focus:border-forest-green transition bg-white disabled:bg-gray-50"
               >
-                <option value="">Select City</option>
+                <option value="">{t('eventDetails.selectCity')}</option>
                 {cities.map(c => (
                   <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
@@ -129,7 +131,7 @@ export function CreateClub() {
           <div className="bg-sand bg-opacity-10 p-4 rounded-xl border border-sand border-opacity-20 flex items-start">
             <Info className="w-5 h-5 text-earth-brown mr-3 mt-0.5" />
             <p className="text-xs text-gray-600 italic">
-              Providing your location helps local hikers find your club more easily.
+              {t('clubs.locationInfo')}
             </p>
           </div>
 
@@ -138,7 +140,7 @@ export function CreateClub() {
             disabled={loading}
             className="w-full bg-forest-green text-white font-bold py-4 rounded-xl hover:bg-opacity-90 transition disabled:opacity-50 shadow-lg"
           >
-            {loading ? 'Creating Group...' : 'Create Club'}
+            {loading ? t('clubs.creating') : t('clubs.createButton')}
           </button>
         </form>
       </div>

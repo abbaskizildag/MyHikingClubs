@@ -302,7 +302,7 @@ export function EventDetails() {
             {event.club?.name?.charAt(0)}
           </div>
           <div>
-            <p className="text-xs text-earth-brown font-bold uppercase tracking-widest">Organized By</p>
+            <p className="text-xs text-earth-brown font-bold uppercase tracking-widest">{t('common.organizedBy')}</p>
             <h4 className="font-bold text-gray-900 text-lg">{event.club?.name}</h4>
           </div>
         </div>
@@ -310,7 +310,7 @@ export function EventDetails() {
           to={`/clubs/${event.clubId}`}
           className="text-earth-brown hover:text-forest-green font-bold text-sm bg-white px-5 py-2.5 rounded-xl shadow-sm border border-sand border-opacity-30 transition"
         >
-          View Club Profile
+          {t('common.viewClubProfile')}
         </Link>
       </div>
     </div>

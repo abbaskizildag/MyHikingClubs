@@ -3,8 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getClubById, updateClub, getCountries, getCities } from '../services/api';
 import { ArrowLeft, Save, MapPin, Globe } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 export function EditClub() {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -52,7 +54,7 @@ export function EditClub() {
           setCities(citiesData);
         }
       } catch (err) {
-        setError('Failed to load club data.');
+        setError(t('common.loadingError'));
       } finally {
         setLoading(false);
       }
@@ -84,7 +86,7 @@ export function EditClub() {
       await updateClub(id, dataToSend);
       navigate(`/clubs/${id}`);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to update club');
+      setError(err.response?.data?.error || t('common.loadingError'));
     } finally {
       setSaving(false);
     }
@@ -101,11 +103,11 @@ export function EditClub() {
   return (
     <div className="max-w-2xl mx-auto">
       <button onClick={() => navigate(-1)} className="text-forest-green hover:underline flex items-center mb-6">
-        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Club
+        <ArrowLeft className="w-4 h-4 mr-2" /> {t('common.back')}
       </button>
 
       <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Edit Club Details</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">{t('clubs.editTitle')}</h1>
 
         {error && (
           <div className="bg-red-50 text-red-600 p-4 rounded-xl mb-6 text-sm">
@@ -115,7 +117,7 @@ export function EditClub() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">Club Name</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">{t('forms.clubName')}</label>
             <input
               type="text"
               required
@@ -126,7 +128,7 @@ export function EditClub() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">{t('common.description')}</label>
             <textarea
               rows={4}
               required
@@ -139,17 +141,17 @@ export function EditClub() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center">
-                <Globe className="w-4 h-4 mr-2 text-forest-green" /> Country
+                <Globe className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.country')}
               </label>
               <select
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-forest-green outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-forest-green outline-none transition bg-white"
                 value={selectedCountryId}
                 onChange={(e) => {
                   setSelectedCountryId(e.target.value);
                   setFormData({ ...formData, cityId: '' });
                 }}
               >
-                <option value="">Select Country</option>
+                <option value="">{t('eventDetails.selectCountry')}</option>
                 {countries.map(c => (
                   <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
@@ -158,15 +160,15 @@ export function EditClub() {
 
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center">
-                <MapPin className="w-4 h-4 mr-2 text-forest-green" /> City
+                <MapPin className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.city')}
               </label>
               <select
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-forest-green outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-forest-green outline-none transition bg-white disabled:bg-gray-50"
                 value={formData.cityId}
                 onChange={(e) => setFormData({ ...formData, cityId: e.target.value })}
                 disabled={!selectedCountryId}
               >
-                <option value="">Select City</option>
+                <option value="">{t('eventDetails.selectCity')}</option>
                 {cities.map(c => (
                   <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
@@ -180,9 +182,9 @@ export function EditClub() {
             className="w-full bg-forest-green text-white font-bold py-4 rounded-xl hover:bg-opacity-90 transition shadow-lg flex items-center justify-center"
           >
             {saving ? (
-              'Saving Changes...'
+              t('clubs.saving')
             ) : (
-              <><Save className="w-5 h-5 mr-2" /> Save Club Settings</>
+              <><Save className="w-5 h-5 mr-2" /> {t('clubs.saveSettings')}</>
             )}
           </button>
         </form>

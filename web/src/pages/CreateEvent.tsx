@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createEvent, getClubMembers, getCountries, getCities } from '../services/api';
 import { Calendar, Users, ArrowLeft, Clock, Tag, ShieldCheck, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function CreateEvent() {
+  const { t } = useTranslation();
   const { id: clubId } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -61,7 +63,7 @@ export function CreateEvent() {
       });
       navigate(`/clubs/${clubId}`);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to create event');
+      setError(err.response?.data?.error || t('common.loadingError'));
     } finally {
       setLoading(false);
     }
@@ -74,7 +76,7 @@ export function CreateEvent() {
   return (
     <div className="max-w-3xl mx-auto">
       <button onClick={() => navigate(`/clubs/${clubId}`)} className="flex items-center text-forest-green hover:underline mb-8">
-        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Club
+        <ArrowLeft className="w-4 h-4 mr-2" /> {t('common.back')}
       </button>
 
       <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
@@ -84,8 +86,8 @@ export function CreateEvent() {
               <Calendar className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Create New Expedition</h2>
-              <p className="text-gray-600">Plan your next adventure and invite the community.</p>
+              <h2 className="text-2xl font-bold text-gray-900">{t('eventDetails.createExpedition')}</h2>
+              <p className="text-gray-600">{t('eventDetails.createExpeditionSubtitle')}</p>
             </div>
           </div>
         </div>
@@ -99,7 +101,7 @@ export function CreateEvent() {
 
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Event Title</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('eventDetails.eventTitle')}</label>
               <input
                 type="text"
                 name="title"
@@ -107,12 +109,12 @@ export function CreateEvent() {
                 value={formData.title}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-forest-green focus:border-transparent transition"
-                placeholder="e.g. Mysterious Canyon Walk"
+                placeholder={t('eventDetails.eventTitlePlaceholder')}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('common.description')}</label>
               <textarea
                 name="description"
                 required
@@ -120,14 +122,14 @@ export function CreateEvent() {
                 onChange={handleChange}
                 rows={4}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-forest-green focus:border-transparent transition"
-                placeholder="Describe the route, meeting point, and what to bring..."
+                placeholder={t('eventDetails.descriptionPlaceholder')}
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center">
-                  <ShieldCheck className="w-4 h-4 mr-2 text-forest-green" /> Expedition Leader 1
+                  <ShieldCheck className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.leader1')}
                 </label>
                 <select
                   name="leader1Id"
@@ -136,7 +138,7 @@ export function CreateEvent() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-forest-green focus:border-transparent transition appearance-none bg-white"
                 >
-                  <option value="">Select a member...</option>
+                  <option value="">{t('eventDetails.selectMember')}</option>
                   {members.filter(m => m.userId !== formData.leader2Id).map(m => (
                     <option key={m.userId} value={m.userId}>{m.user?.name} ({m.role})</option>
                   ))}
@@ -145,7 +147,7 @@ export function CreateEvent() {
 
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center">
-                  <ShieldCheck className="w-4 h-4 mr-2 text-forest-green" /> Expedition Leader 2
+                  <ShieldCheck className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.leader2')}
                 </label>
                 <select
                   name="leader2Id"
@@ -153,7 +155,7 @@ export function CreateEvent() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-forest-green focus:border-transparent transition appearance-none bg-white"
                 >
-                  <option value="">Select a member (optional)...</option>
+                  <option value="">{t('eventDetails.selectMemberOptional')}</option>
                   {members.filter(m => m.userId !== formData.leader1Id).map(m => (
                     <option key={m.userId} value={m.userId}>{m.user?.name} ({m.role})</option>
                   ))}
@@ -164,7 +166,7 @@ export function CreateEvent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <MapPin className="w-4 h-4 mr-2 text-forest-green" /> Country
+                  <MapPin className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.country')}
                 </label>
                 <select
                   required
@@ -172,7 +174,7 @@ export function CreateEvent() {
                   onChange={(e) => setCountryId(e.target.value)}
                   className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-forest-green focus:border-forest-green transition bg-white"
                 >
-                  <option value="">Select Country</option>
+                  <option value="">{t('eventDetails.selectCountry')}</option>
                   {countries.map(c => (
                     <option key={c.id} value={c.id}>{c.name}</option>
                   ))}
@@ -181,7 +183,7 @@ export function CreateEvent() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <MapPin className="w-4 h-4 mr-2 text-forest-green" /> City
+                  <MapPin className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.city')}
                 </label>
                 <select
                   required
@@ -191,7 +193,7 @@ export function CreateEvent() {
                   onChange={handleChange}
                   className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-forest-green focus:border-forest-green transition bg-white disabled:bg-gray-50"
                 >
-                  <option value="">Select City</option>
+                  <option value="">{t('eventDetails.selectCity')}</option>
                   {cities.map(c => (
                     <option key={c.id} value={c.id}>{c.name}</option>
                   ))}
@@ -202,7 +204,7 @@ export function CreateEvent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center">
-                  <Clock className="w-4 h-4 mr-2 text-forest-green" /> Date and Time
+                  <Clock className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.dateTime')}
                 </label>
                 <input
                   type="datetime-local"
@@ -216,7 +218,7 @@ export function CreateEvent() {
 
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center">
-                  <Users className="w-4 h-4 mr-2 text-forest-green" /> Max Capacity
+                  <Users className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.maxCapacity')}
                 </label>
                 <input
                   type="number"
@@ -233,7 +235,7 @@ export function CreateEvent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center">
-                  <Tag className="w-4 h-4 mr-2 text-forest-green" /> Difficulty Level
+                  <Tag className="w-4 h-4 mr-2 text-forest-green" /> {t('eventDetails.difficulty')}
                 </label>
                 <select
                   name="difficultyLevel"
@@ -241,9 +243,9 @@ export function CreateEvent() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-forest-green focus:border-transparent transition appearance-none bg-white"
                 >
-                  <option value="EASY">Easy - Beginner Friendly</option>
-                  <option value="MODERATE">Moderate - Regular Hikers</option>
-                  <option value="HARD">Hard - Challenging Peaks</option>
+                  <option value="EASY">{t('eventDetails.easyDesc')}</option>
+                  <option value="MODERATE">{t('eventDetails.moderateDesc')}</option>
+                  <option value="HARD">{t('eventDetails.hardDesc')}</option>
                 </select>
               </div>
             </div>
@@ -255,7 +257,7 @@ export function CreateEvent() {
               disabled={loading}
               className="w-full bg-forest-green text-white font-bold py-4 rounded-2xl hover:bg-opacity-90 transition disabled:opacity-50 shadow-xl"
             >
-              {loading ? 'Publishing Expedition...' : 'Publish Event'}
+              {loading ? t('eventDetails.publishing') : t('eventDetails.publishEvent')}
             </button>
           </div>
         </form>

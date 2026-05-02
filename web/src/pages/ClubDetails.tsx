@@ -134,7 +134,7 @@ export function ClubDetails() {
                     <CheckCircle className="w-5 h-5 mr-2 text-earth-brown" />
                     <div className="flex flex-col items-start leading-tight">
                       <span className="text-[10px] uppercase tracking-widest opacity-70 font-black">{t('clubDetails.clubMember')}</span>
-                      <span className="text-sm font-bold">{userMembership.role}</span>
+                      <span className="text-sm font-bold">{t(`common.roles.${userMembership.role.toLowerCase()}`)}</span>
                     </div>
                   </div>
                 ) : (
@@ -210,19 +210,19 @@ export function ClubDetails() {
                         </div>
                         <div>
                           <p className="font-bold text-gray-900 text-sm">{m.user?.name}</p>
-                          <p className="text-xs text-gray-500 uppercase font-semibold tracking-wider">{m.role}</p>
+                          <p className="text-xs text-gray-500 uppercase font-semibold tracking-wider">{t(`common.roles.${m.role.toLowerCase()}`)}</p>
                         </div>
                       </div>
                       
                       {isAdmin && m.userId !== user?.id && (
                         <select
-                          className="text-xs border-none bg-gray-50 rounded-lg py-1 px-2 focus:ring-1 focus:ring-forest-green"
+                          className="text-xs border-none bg-gray-50 rounded-lg py-1 px-2 focus:ring-1 focus:ring-forest-green transition-all"
                           value={m.role}
                           onChange={(e) => handleRoleChange(m.userId, e.target.value)}
                         >
-                          <option value="MEMBER">MEMBER</option>
-                          <option value="LEADER">LEADER</option>
-                          <option value="ADMIN">ADMIN</option>
+                          <option value="MEMBER">{t('common.roles.member')}</option>
+                          <option value="LEADER">{t('common.roles.leader')}</option>
+                          <option value="ADMIN">{t('common.roles.admin')}</option>
                         </select>
                       )}
                     </div>
