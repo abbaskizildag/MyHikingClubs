@@ -11,7 +11,7 @@ function Navbar() {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold tracking-tight hover:text-sand transition flex items-center">
           <MapIcon className="w-6 h-6 mr-2" />
-          Hiking Community
+          My Hiking Clubs
         </Link>
         <nav>
           <ul className="flex items-center space-x-6">
@@ -72,13 +72,13 @@ function App() {
 
           <footer className="bg-gray-900 text-gray-400 py-10 text-center border-t border-gray-800">
             <div className="container mx-auto px-4">
-              <p className="text-white font-bold mb-2">Hiking Community</p>
+              <p className="text-white font-bold mb-2">My Hiking Clubs</p>
               <p className="text-sm mb-4">Discover the best hiking trails and join our passionate community.</p>
               <div className="flex justify-center space-x-6 mb-6">
                 <Link to="/clubs" className="hover:text-white transition">Explore Clubs</Link>
                 <Link to="/" className="hover:text-white transition">Upcoming Events</Link>
               </div>
-              <p className="text-xs">&copy; {new Date().getFullYear()} Hiking Community. All rights reserved.</p>
+              <p className="text-xs">&copy; {new Date().getFullYear()} My Hiking Clubs. All rights reserved.</p>
             </div>
           </footer>
         </div>
