@@ -1,0 +1,126 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Country {
+  id     String @id @default(uuid())
+  name   String @unique
+  code   String @unique
+  cities City[]
+}
+
+model City {
+  id        String  @id @default(uuid())
+  name      String
+  countryId String
+  country   Country @relation(fields: [countryId], references: [id])
+  clubs     Club[]
+  events    Event[]
+
+  @@unique([name, countryId])
+}
+
+model Club {
+  id          String       @id @default(uuid())
+  name        String
+  description String?
+  cityId      String?
+  city        City?        @relation(fields: [cityId], references: [id])
+  events      Event[]
+  members     ClubMember[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model User {
+  id        String          @id @default(uuid())
+  email     String          @unique
+  password  String
+  name      String
+  role      Role            @default(USER)
+  attendees EventAttendee[]
+  clubs     ClubMember[]
+  ledEvents EventLeader[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model ClubMember {
+  id        String   @id @default(uuid())
+  clubId    String
+  userId    String
+  role      ClubRole @default(MEMBER)
+  club      Club     @relation(fields: [clubId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([clubId, userId])
+}
+
+enum ClubRole {
+  MEMBER
+  LEADER
+  ADMIN
+}
+
+enum Role {
+  USER
+  ADMIN
+  LEADER
+}
+
+enum Difficulty {
+  EASY
+  MODERATE
+  HARD
+}
+
+model Event {
+  id              String          @id @default(uuid())
+  title           String
+  description     String
+  date            DateTime
+  clubId          String
+  club            Club            @relation(fields: [clubId], references: [id])
+  cityId          String?
+  city            City?           @relation(fields: [cityId], references: [id])
+  capacity        Int
+  priceDetails    Json            // e.g. { "camp": 500, "transport": 200 }
+  difficultyLevel Difficulty
+  attendees       EventAttendee[]
+  leaders         EventLeader[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model EventLeader {
+  id        String   @id @default(uuid())
+  eventId   String
+  userId    String
+  event     Event    @relation(fields: [eventId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([eventId, userId])
+}
+
+enum AttendeeStatus {
+  CONFIRMED
+  WAITLISTED
+}
+
+model EventAttendee {
+  id        String         @id @default(uuid())
+  eventId   String
+  userId    String
+  user      User           @relation(fields: [userId], references: [id])
+  status    AttendeeStatus
+  event     Event          @relation(fields: [eventId], references: [id])
+  createdAt DateTime       @default(now())
+
+  @@unique([eventId, userId])
+}
