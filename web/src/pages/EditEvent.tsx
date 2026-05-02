@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getEventById, updateEvent, getClubMembers, getCountries, getCities } from '../services/api';
-import { Calendar, Users, ArrowLeft, Clock, Tag, ShieldCheck, MapPin } from 'lucide-react';
+import { Calendar, Users, ArrowLeft, Clock, ShieldCheck, MapPin } from 'lucide-react';
 
 export function EditEvent() {
   const { id: eventId } = useParams<{ id: string }>();
@@ -13,7 +13,6 @@ export function EditEvent() {
   const [countries, setCountries] = useState<any[]>([]);
   const [cities, setCities] = useState<any[]>([]);
   const [countryId, setCountryId] = useState('');
-  const [clubId, setClubId] = useState('');
 
   const [formData, setFormData] = useState({
     title: '',
@@ -55,7 +54,6 @@ export function EditEvent() {
           priceDetails: event.priceDetails
         });
 
-        setClubId(event.clubId);
         if (event.city?.countryId) {
           setCountryId(event.city.countryId);
         }

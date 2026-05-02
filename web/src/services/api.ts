@@ -50,7 +50,7 @@ export const getClubById = async (id: string) => {
   return response.data;
 };
 
-export const createClub = async (data: { name: string; description: string }) => {
+export const createClub = async (data: { name: string; description: string; cityId?: string | null }) => {
   const response = await api.post('/clubs', data);
   return response.data;
 };
