@@ -29,7 +29,7 @@ function Navbar() {
             <li className="flex items-center">
               <button 
                 onClick={toggleLanguage}
-                className="bg-transparent hover:bg-white hover:bg-opacity-10 text-white px-3 py-1.5 rounded-lg text-xs font-black transition-all flex items-center border-2 border-white border-opacity-30 hover:border-opacity-50 shadow-sm"
+                className="bg-transparent hover:bg-sand text-white hover:text-forest-green px-3 py-1.5 rounded-lg text-xs font-black transition-all flex items-center border-2 border-white border-opacity-30 hover:border-sand shadow-sm"
               >
                 {i18n.language.substring(0, 2).toUpperCase()}
               </button>
