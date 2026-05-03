@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getProfile, updateProfile } from '../services/api';
-import { User, Mail, Calendar, Users, Edit3, Save, CheckCircle, Clock } from 'lucide-react';
+import { Mail, Calendar, Users, Edit3, Save, CheckCircle, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { formatDateTime } from '../utils/date';
 import { Link } from 'react-router-dom';
