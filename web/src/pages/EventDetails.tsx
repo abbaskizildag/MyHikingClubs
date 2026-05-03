@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getEventById, joinEvent, leaveEvent } from '../services/api';
-import { Calendar, Users, MapPin, ArrowLeft, Info, Edit3, Shield, User, CheckCircle } from 'lucide-react';
+import { Calendar, Users, MapPin, ArrowLeft, Info, Edit3, Shield, User, CheckCircle, Map as MapIcon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { formatDateTime } from '../utils/date';
 import clsx from 'clsx';
