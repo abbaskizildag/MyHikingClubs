@@ -148,5 +148,21 @@ export const en = {
     eventTitle: "Event Title",
     maxCapacity: "Max Capacity",
     dateTime: "Date and Time",
+  },
+  profile: {
+    title: "My Profile",
+    subtitle: "Manage your information and view your hiking history.",
+    editProfile: "Edit Profile",
+    name: "Full Name",
+    email: "Email Address",
+    updateSuccess: "Profile updated successfully!",
+    statsTitle: "Hiking Stats",
+    myClubs: "My Clubs",
+    myEvents: "My Expeditions",
+    noClubs: "You haven't joined any clubs yet.",
+    exploreClubs: "Explore Clubs",
+    noEvents: "You haven't joined any expeditions yet.",
+    exploreEvents: "Find Your Next Adventure",
+    pastEvent: "Past Expedition",
   }
 };

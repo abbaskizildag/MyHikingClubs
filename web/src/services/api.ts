@@ -89,3 +89,14 @@ export const updateEvent = async (eventId: string, data: any) => {
   const response = await api.patch(`/events/${eventId}`, data);
   return response.data;
 };
+
+// User Profile
+export const getProfile = async () => {
+  const response = await api.get('/auth/me');
+  return response.data;
+};
+
+export const updateProfile = async (data: { name: string; email: string }) => {
+  const response = await api.put('/auth/me', data);
+  return response.data;
+};

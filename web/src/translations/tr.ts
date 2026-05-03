@@ -145,5 +145,21 @@ export const tr = {
     eventTitle: "Etkinlik Başlığı",
     maxCapacity: "Maksimum Kapasite",
     dateTime: "Tarih ve Saat",
+  },
+  profile: {
+    title: "Profilim",
+    subtitle: "Bilgilerini yönet ve yürüyüş geçmişini görüntüle.",
+    editProfile: "Profili Düzenle",
+    name: "Ad Soyad",
+    email: "E-posta Adresi",
+    updateSuccess: "Profil başarıyla güncellendi!",
+    statsTitle: "Yürüyüş İstatistikleri",
+    myClubs: "Kulüplerim",
+    myEvents: "Katıldığım Etkinlikler",
+    noClubs: "Henüz bir kulübe üye değilsin.",
+    exploreClubs: "Kulüpleri Keşfet",
+    noEvents: "Henüz bir etkinliğe katılmadın.",
+    exploreEvents: "Yeni Maceralar Bul",
+    pastEvent: "Geçmiş Etkinlik",
   }
 };

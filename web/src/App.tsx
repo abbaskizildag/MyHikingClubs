@@ -42,12 +42,12 @@ function Navbar() {
 
               {user ? (
                 <li className="flex items-center space-x-6 border-l pl-8 border-white border-opacity-10">
-                  <div className="flex items-center space-x-3 bg-white bg-opacity-5 px-4 py-2 rounded-2xl border border-white border-opacity-5">
+                  <Link to="/profile" className="flex items-center space-x-3 bg-white bg-opacity-5 px-4 py-2 rounded-2xl border border-white border-opacity-5 hover:bg-opacity-10 transition">
                     <div className="w-8 h-8 rounded-full bg-sand text-forest-green flex items-center justify-center font-black text-xs shadow-inner">
                       {user.name?.charAt(0) || 'U'}
                     </div>
                     <span className="font-bold text-sm text-sand">{user.name}</span>
-                  </div>
+                  </Link>
                   <button 
                     onClick={logout}
                     className="bg-sand hover:bg-opacity-90 p-2.5 rounded-xl transition text-forest-green shadow-lg flex items-center group"
@@ -96,7 +96,7 @@ function Navbar() {
 
               {user ? (
                 <div className="pt-4 space-y-4">
-                  <div className="flex items-center space-x-4 bg-white bg-opacity-5 p-4 rounded-2xl border border-white border-opacity-5 mx-2">
+                  <Link to="/profile" onClick={() => setIsMenuOpen(false)} className="flex items-center space-x-4 bg-white bg-opacity-5 p-4 rounded-2xl border border-white border-opacity-5 mx-2 hover:bg-opacity-10 transition">
                     <div className="w-10 h-10 rounded-full bg-sand text-forest-green flex items-center justify-center font-black text-sm shadow-inner">
                       {user.name?.charAt(0) || 'U'}
                     </div>
@@ -104,7 +104,7 @@ function Navbar() {
                       <span className="font-black text-sand leading-none mb-1">{user.name}</span>
                       <span className="text-xs opacity-60 uppercase tracking-widest">{user.email}</span>
                     </div>
-                  </div>
+                  </Link>
                   <button 
                     onClick={() => { logout(); setIsMenuOpen(false); }}
                     className="w-full bg-sand text-forest-green p-4 rounded-2xl font-black transition shadow-xl flex items-center justify-center space-x-3 uppercase tracking-wider"
@@ -158,7 +158,8 @@ function App() {
               <Route path="/clubs/:id" element={<ClubDetails />} />
               <Route path="/clubs/:id/events/new" element={<CreateEvent />} />
               <Route path="/event/:id/edit" element={<EditEvent />} />
-          <Route path="/clubs/:id/edit" element={<EditClub />} />
+              <Route path="/clubs/:id/edit" element={<EditClub />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </main>
 

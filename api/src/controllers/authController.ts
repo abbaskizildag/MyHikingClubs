@@ -27,11 +27,59 @@ export class AuthController {
     try {
       const user = await prisma.user.findUnique({
         where: { id: req.user.userId },
-        select: { id: true, email: true, name: true, role: true }
+        select: { 
+          id: true, 
+          email: true, 
+          name: true, 
+          role: true,
+          clubs: {
+            include: {
+              club: {
+                include: {
+                  _count: {
+                    select: { members: true, events: true }
+                  }
+                }
+              }
+            }
+          },
+          attendees: {
+            include: {
+              event: {
+                include: {
+                  club: true,
+                  city: { include: { country: true } }
+                }
+              }
+            },
+            orderBy: {
+              event: {
+                date: 'desc'
+              }
+            }
+          }
+        }
       });
       res.json({ user });
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch user' });
+    }
+  }
+
+  async updateMe(req: any, res: Response) {
+    const { name, email } = req.body;
+    try {
+      const user = await prisma.user.update({
+        where: { id: req.user.userId },
+        data: { name, email },
+        select: { id: true, email: true, name: true, role: true }
+      });
+      res.json({ user });
+    } catch (error: any) {
+      if (error.code === 'P2002') {
+        return res.status(400).json({ error: 'Email already in use' });
+      }
+      res.status(500).json({ error: 'Failed to update profile' });
     }
   }
 }

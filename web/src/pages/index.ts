@@ -8,3 +8,4 @@ export * from './ClubDetails';
 export * from './CreateEvent';
 export * from './EditEvent';
 export * from './EditClub';
+export * from './Profile';
