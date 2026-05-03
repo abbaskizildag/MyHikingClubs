@@ -88,60 +88,60 @@ export function ClubDetails() {
         <ArrowLeft className="w-4 h-4 mr-2" /> {t('common.back')}
       </button>
 
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-12 border border-gray-100">
-        <div className="bg-forest-green p-8 md:p-12 text-white relative">
+      <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-8 md:mb-12 border border-gray-100">
+        <div className="bg-forest-green p-6 md:p-12 text-white relative">
           <div className="relative z-10">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
               <div className="flex-grow">
                 <div className="flex items-center gap-4 mb-4">
-                  <h1 className="text-4xl md:text-5xl font-extrabold">{club.name}</h1>
+                  <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-none">{club.name}</h1>
                   {isAuthorized && (
                     <Link 
                       to={`/clubs/${club.id}/edit`}
-                      className="p-2 bg-sand hover:bg-opacity-90 rounded-xl transition text-forest-green shadow-lg"
+                      className="p-2.5 bg-sand hover:bg-opacity-90 rounded-xl transition text-forest-green shadow-lg shrink-0"
                       title={t('clubDetails.editClub')}
                     >
                       <Edit3 className="w-5 h-5" />
                     </Link>
                   )}
                 </div>
-                  <div className="flex flex-wrap items-center gap-4 mb-6">
-                    <p className="text-forest-green bg-sand inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
+                  <div className="flex flex-wrap items-center gap-3 mb-6">
+                    <p className="text-forest-green bg-sand inline-block px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
                       {t('clubDetails.establishedCommunity')}
                     </p>
                     {club.city && (
-                      <p className="text-forest-green bg-sand inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
+                      <p className="text-forest-green bg-sand inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
                         <MapPin className="w-3.5 h-3.5 mr-1.5 text-forest-green" />
-                        {club.city.name}, {club.city.country?.name}
+                        {club.city.name}
                       </p>
                     )}
                   </div>
-                <p className="text-xl text-white text-opacity-90 max-w-2xl leading-relaxed">
+                <p className="text-lg md:text-xl text-white text-opacity-90 max-w-2xl leading-relaxed font-medium">
                   {club.description}
                 </p>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 w-full md:w-auto">
                 {isAuthorized && (
                   <Link
                     to={`/clubs/${club.id}/events/new`}
-                    className="bg-sand text-forest-green px-8 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition shadow-2xl flex items-center justify-center whitespace-nowrap"
+                    className="bg-sand text-forest-green px-8 py-5 rounded-2xl font-black hover:bg-opacity-90 transition shadow-2xl flex items-center justify-center whitespace-nowrap uppercase tracking-widest text-sm"
                   >
                     <Plus className="w-6 h-6 mr-2" /> {t('clubDetails.createEvent')}
                   </Link>
                 )}
                 {isMember ? (
-                  <div className="px-6 py-3 rounded-2xl font-bold flex items-center justify-center bg-sand border-2 border-sand border-opacity-50 text-earth-brown shadow-lg">
-                    <CheckCircle className="w-5 h-5 mr-2 text-earth-brown" />
+                  <div className="px-6 py-4 rounded-2xl font-black flex items-center justify-center bg-white bg-opacity-10 border-2 border-white border-opacity-10 text-sand shadow-lg backdrop-blur-sm">
+                    <CheckCircle className="w-6 h-6 mr-3 text-sand" />
                     <div className="flex flex-col items-start leading-tight">
-                      <span className="text-[10px] uppercase tracking-widest opacity-70 font-black">{t('clubDetails.clubMember')}</span>
-                      <span className="text-sm font-bold">{t(`common.roles.${userMembership.role.toLowerCase()}`)}</span>
+                      <span className="text-[10px] uppercase tracking-widest opacity-60 font-black">{t('clubDetails.clubMember')}</span>
+                      <span className="text-sm font-black uppercase">{t(`common.roles.${userMembership.role.toLowerCase()}`)}</span>
                     </div>
                   </div>
                 ) : (
                   <button
                     onClick={handleJoinClub}
                     disabled={joining}
-                    className="px-8 py-4 rounded-2xl font-bold transition flex items-center justify-center whitespace-nowrap bg-white text-forest-green hover:bg-gray-100 shadow-xl"
+                    className="px-10 py-5 rounded-2xl font-black transition flex items-center justify-center whitespace-nowrap bg-white text-forest-green hover:bg-gray-100 shadow-2xl uppercase tracking-widest text-sm"
                   >
                     <UserPlus className="w-6 h-6 mr-2" /> {joining ? t('common.loading') : t('clubDetails.joinClub')}
                   </button>

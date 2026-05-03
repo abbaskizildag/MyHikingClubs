@@ -40,15 +40,15 @@ export function Home() {
         </p>
       </div>
 
-      <div className="flex justify-center space-x-2 mb-8">
+      <div className="flex justify-start md:justify-center overflow-x-auto no-scrollbar pb-4 -mx-4 px-4 md:mx-0 md:px-0 space-x-2 mb-8 scroll-smooth">
         {filters.map(f => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={clsx(
-              'px-4 py-2 rounded-full text-sm font-medium transition',
+              'px-6 py-2.5 rounded-full text-sm font-bold transition whitespace-nowrap shadow-sm',
               filter === f 
-                ? 'bg-earth-brown text-white shadow-md' 
+                ? 'bg-earth-brown text-white shadow-lg ring-2 ring-earth-brown ring-offset-2' 
                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
             )}
           >

@@ -26,6 +26,7 @@ export const en = {
     description: "Description",
     confirmed: "Confirmed",
     waitlisted: "Waitlisted",
+    language: "Language",
   },
   navbar: {
     title: "My Hiking Clubs"

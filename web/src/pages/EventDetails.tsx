@@ -117,22 +117,27 @@ export function EventDetails() {
         )}
       </div>
 
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 mb-12">
-        <div className="h-48 bg-forest-green opacity-95 relative flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-white text-center px-4 drop-shadow-md">{event.title}</h1>
+      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 mb-8 md:mb-12">
+        <div className="h-40 md:h-56 bg-forest-green opacity-95 relative flex items-center justify-center p-6 text-center">
+          <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
+            <MapIcon className="w-64 h-64 -rotate-12 absolute -right-12 -bottom-12" />
+          </div>
+          <h1 className="text-2xl md:text-5xl font-black text-white drop-shadow-2xl relative z-10 leading-tight uppercase tracking-tight">
+            {event.title}
+          </h1>
         </div>
 
-        <div className="p-8">
-          <div className="flex justify-between items-start mb-6">
-            <span className={clsx('text-sm font-semibold px-3 py-1 rounded-full', difficultyColors[event.difficultyLevel] || 'bg-gray-100 text-gray-800')}>
+        <div className="p-5 md:p-10">
+          <div className="flex flex-wrap justify-between items-center gap-3 mb-8">
+            <span className={clsx('text-[10px] md:text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm', difficultyColors[event.difficultyLevel] || 'bg-gray-100 text-gray-800')}>
               {t(`home.${event.difficultyLevel.toLowerCase()}`)} {t('eventDetails.difficulty')}
             </span>
-            <span className={clsx('text-sm font-semibold px-3 py-1 rounded-full border', event.isFull ? 'border-red-200 text-red-600 bg-red-50' : 'border-green-200 text-green-600 bg-green-50')}>
+            <span className={clsx('text-[10px] md:text-xs font-black px-4 py-1.5 rounded-full border uppercase tracking-widest shadow-sm', event.isFull ? 'border-red-200 text-red-600 bg-red-50' : 'border-green-200 text-green-600 bg-green-50')}>
               {event.isFull ? t('eventDetails.capacityFull') : t('common.spotsAvailable')}
             </span>
           </div>
 
-          <p className="text-gray-700 text-lg mb-10 leading-relaxed italic border-l-4 border-sand pl-6">
+          <p className="text-gray-700 text-base md:text-xl mb-10 leading-relaxed italic border-l-4 border-sand pl-5 md:pl-8 bg-gray-50 py-4 pr-4 rounded-r-2xl font-medium">
             "{event.description}"
           </p>
 
@@ -239,32 +244,32 @@ export function EventDetails() {
             </div>
           </div>
 
-          <div className="p-8 bg-gray-50 rounded-3xl border border-gray-200 flex flex-col md:flex-row items-center justify-between gap-6 shadow-inner">
+          <div className="p-6 md:p-10 bg-gray-50 rounded-3xl border border-gray-200 flex flex-col md:flex-row items-center justify-between gap-8 shadow-inner">
             {isExpeditionLeader ? (
               <div className="flex flex-col md:flex-row items-center justify-between w-full gap-6">
                 <div className="flex items-center gap-4 text-forest-green">
-                  <div className="bg-forest-green bg-opacity-10 p-3 rounded-2xl">
+                  <div className="bg-forest-green bg-opacity-10 p-3 rounded-2xl shrink-0">
                     <Shield className="w-8 h-8" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold">{t('eventDetails.youAreLeader')}</h4>
+                    <h4 className="text-lg md:text-xl font-black uppercase tracking-tight">{t('eventDetails.youAreLeader')}</h4>
                     <p className="text-gray-600 text-sm">{t('eventDetails.leaderSubtitle')}</p>
                   </div>
                 </div>
-                <div className="bg-white px-6 py-3 rounded-2xl border border-forest-green border-opacity-20 flex items-center text-forest-green font-bold shadow-sm">
+                <div className="bg-white px-8 py-4 rounded-2xl border-2 border-forest-green border-opacity-10 flex items-center text-forest-green font-black shadow-sm uppercase tracking-widest text-xs">
                   <CheckCircle className="w-5 h-5 mr-2" /> {t('common.confirmed')}
                 </div>
               </div>
             ) : (
               <>
                 <div className="text-center md:text-left">
-                  <h4 className="text-xl font-bold text-gray-900 mb-1">{t('eventDetails.joinAdventure')}</h4>
+                  <h4 className="text-xl md:text-2xl font-black text-gray-900 mb-2 uppercase tracking-tight">{t('eventDetails.joinAdventure')}</h4>
                   {isRegistered ? (
-                    <p className="text-gray-600">
-                      {t('eventDetails.yourStatus')} <strong className={clsx("px-2 py-0.5 rounded", userStatus === 'CONFIRMED' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700')}>{t(`common.${userStatus?.toLowerCase()}`)}</strong>
+                    <p className="text-gray-600 font-medium">
+                      {t('eventDetails.yourStatus')} <strong className={clsx("px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest ml-1", userStatus === 'CONFIRMED' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700')}>{t(`common.${userStatus?.toLowerCase()}`)}</strong>
                     </p>
                   ) : (
-                    <p className="text-gray-600">{t('eventDetails.secureSpot')}</p>
+                    <p className="text-gray-600 font-medium">{t('eventDetails.secureSpot')}</p>
                   )}
                 </div>
                 
@@ -273,7 +278,7 @@ export function EventDetails() {
                     <button
                       onClick={handleLeave}
                       disabled={actionLoading}
-                      className="px-10 py-4 bg-white text-red-600 border-2 border-red-100 hover:bg-red-50 font-bold rounded-2xl transition disabled:opacity-50 shadow-sm"
+                      className="w-full md:w-auto px-10 py-5 bg-white text-red-600 border-2 border-red-100 hover:bg-red-50 font-black rounded-2xl transition disabled:opacity-50 shadow-sm uppercase tracking-widest text-sm"
                     >
                       {actionLoading ? t('common.loading') : t('eventDetails.cancelRegistration')}
                     </button>
@@ -282,7 +287,7 @@ export function EventDetails() {
                       onClick={handleJoin}
                       disabled={actionLoading}
                       className={clsx(
-                        "px-10 py-4 font-bold rounded-2xl transition disabled:opacity-50 shadow-xl text-white text-lg",
+                        "w-full md:w-auto px-12 py-5 font-black rounded-2xl transition disabled:opacity-50 shadow-2xl text-white text-sm uppercase tracking-widest",
                         event.isFull ? "bg-orange-500 hover:bg-orange-600 shadow-orange-200" : "bg-forest-green hover:bg-opacity-90 shadow-forest-green/20"
                       )}
                     >

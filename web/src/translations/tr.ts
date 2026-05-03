@@ -26,6 +26,7 @@ export const tr = {
     description: "Açıklama",
     confirmed: "Onaylandı",
     waitlisted: "Yedek Liste",
+    language: "Dil",
   },
   navbar: {
     title: "My Hiking Clubs"

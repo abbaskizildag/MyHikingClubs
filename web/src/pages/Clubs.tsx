@@ -26,19 +26,19 @@ export function Clubs() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-10">
         <div>
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-tight">
             {t('clubs.title')}
           </h2>
-          <p className="mt-2 text-lg text-gray-600">
+          <p className="mt-2 text-base md:text-lg text-gray-500 font-medium">
             {t('clubs.subtitle')}
           </p>
         </div>
         {user && (
           <Link
             to="/clubs/new"
-            className="flex items-center bg-forest-green text-white px-4 py-2 rounded-xl font-bold hover:bg-opacity-90 transition shadow-lg"
+            className="w-full sm:w-auto flex items-center justify-center bg-forest-green text-white px-8 py-4 rounded-2xl font-black hover:bg-opacity-90 transition shadow-2xl uppercase tracking-widest text-xs"
           >
             <Plus className="w-5 h-5 mr-2" />
             {t('clubs.createButton')}
