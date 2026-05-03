@@ -87,7 +87,7 @@ function Navbar() {
                 <span className="text-sm font-bold opacity-60 uppercase tracking-widest">{t('common.language')}</span>
                 <button 
                   onClick={toggleLanguage}
-                  className="bg-white bg-opacity-10 text-white px-5 py-2.5 rounded-xl text-xs font-black transition-all flex items-center border border-white border-opacity-20 uppercase tracking-widest"
+                  className="bg-transparent hover:bg-sand text-white hover:text-forest-green px-6 py-2.5 rounded-xl text-xs font-black transition-all flex items-center border-2 border-white/30 hover:border-sand shadow-sm uppercase tracking-widest"
                 >
                   <Globe className="w-4 h-4 mr-2" />
                   {i18n.language === 'tr' ? 'TURKISH' : 'ENGLISH'}
