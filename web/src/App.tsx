@@ -33,9 +33,9 @@ function Navbar() {
               <li>
                 <button 
                   onClick={toggleLanguage}
-                  className="bg-white bg-opacity-10 hover:bg-sand text-white hover:text-forest-green px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center border border-white border-opacity-20 hover:border-sand shadow-sm uppercase tracking-widest"
+                  className="bg-transparent hover:bg-sand text-white hover:text-forest-green px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center border-2 border-white/30 hover:border-sand shadow-sm uppercase tracking-widest"
                 >
-                  <Globe className="w-3.5 h-3.5 mr-2" />
+                  <Globe className="w-4 h-4 mr-2" />
                   {i18n.language.substring(0, 2).toUpperCase()}
                 </button>
               </li>
