@@ -1,16 +1,8 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Home, EventDetails, Login, Register, Clubs, CreateClub, ClubDetails, CreateEvent, EditEvent, EditClub } from './pages';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import { LogOut, Map as MapIcon } from 'lucide-react';
-
-import { useTranslation } from 'react-i18next';
-
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Home, EventDetails, Login, Register, Clubs, CreateClub, ClubDetails, CreateEvent, EditEvent, EditClub } from './pages';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { LogOut, Map as MapIcon, Menu, X, Globe } from 'lucide-react';
-
 import { useTranslation } from 'react-i18next';
 
 function Navbar() {
